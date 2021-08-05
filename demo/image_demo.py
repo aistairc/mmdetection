@@ -28,7 +28,8 @@ def main(args):
     # test a single image
     result = inference_detector(model, args.img)
     # show the results
-    show_result_pyplot(model, args.img, result, score_thr=args.score_thr)
+    # show_result_pyplot(model, args.img, result, score_thr=args.score_thr)
+    show_result_pyplot(model, args.img, result, score_thr=args.score_thr, out_file=args.out_file)
 
 
 async def async_main(args):
