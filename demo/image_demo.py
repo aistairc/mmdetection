@@ -10,6 +10,7 @@ def parse_args():
     parser.add_argument('img', help='Image file')
     parser.add_argument('config', help='Config file')
     parser.add_argument('checkpoint', help='Checkpoint file')
+    parser.add_argument('output', help='Output filepath')
     parser.add_argument(
         '--device', default='cuda:0', help='Device used for inference')
     parser.add_argument(
@@ -29,7 +30,7 @@ def main(args):
     result = inference_detector(model, args.img)
     # show the results
     # show_result_pyplot(model, args.img, result, score_thr=args.score_thr)
-    show_result_pyplot(model, args.img, result, score_thr=args.score_thr, out_file=args.out_file)
+    show_result_pyplot(model, args.img, result, score_thr=args.score_thr, out_file=args.output)
 
 
 async def async_main(args):
