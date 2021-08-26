@@ -103,8 +103,8 @@ venv.bak/
 # mypy
 .mypy_cache/
 
-data/
-data
+#data/
+#data
 .vscode
 .idea
 .DS_Store
@@ -126,3 +126,4 @@ work_dirs/
 /__results/
 abci/simg
 demo.sh.o*
+data/outputs/
