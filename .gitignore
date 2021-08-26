@@ -122,4 +122,7 @@ work_dirs/
 *.py~
 *.sh~
 
+*~
 /__results/
+abci/simg
+demo.sh.o*
