@@ -269,7 +269,8 @@ class BaseDetector(BaseModule, metaclass=ABCMeta):
                     win_name='',
                     show=False,
                     wait_time=0,
-                    out_file=None):
+                    out_file=None,
+                    save_segms=None):
         """Draw `result` over `img`.
 
         Args:
@@ -339,7 +340,8 @@ class BaseDetector(BaseModule, metaclass=ABCMeta):
             win_name=win_name,
             show=show,
             wait_time=wait_time,
-            out_file=out_file)
+            out_file=out_file,
+            save_segms=save_segms)
 
         if not (show or out_file):
             return img

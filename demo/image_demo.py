@@ -19,7 +19,10 @@ def parse_args():
         action='store_true',
         help='whether to set async options for async inference.')
     parser.add_argument(
-        '--out_file', type=str, default=None, help='Output filepath')
+        '--out_file', type=str, default=None, help='Output image file')
+    parser.add_argument(
+        '--save_segms', type=str, default=None, help='Safe segmentation info')
+
     args = parser.parse_args()
     return args
 
@@ -31,7 +34,7 @@ def main(args):
     result = inference_detector(model, args.img)
     # show the results
     # show_result_pyplot(model, args.img, result, score_thr=args.score_thr)
-    show_result_pyplot(model, args.img, result, score_thr=args.score_thr, out_file=args.out_file)
+    show_result_pyplot(model, args.img, result, score_thr=args.score_thr, out_file=args.out_file, save_segms=args.save_segms)
 
 
 async def async_main(args):

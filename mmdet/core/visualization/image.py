@@ -39,7 +39,8 @@ def imshow_det_bboxes(img,
                       win_name='',
                       show=True,
                       wait_time=0,
-                      out_file=None):
+                      out_file=None,
+                      save_segms=None):
     """Draw bboxes and class labels (with scores) on an image.
 
     Args:
@@ -125,6 +126,7 @@ def imshow_det_bboxes(img,
 
     polygons = []
     color = []
+    _save = []
     for i, (bbox, label) in enumerate(zip(bboxes, labels)):
         bbox_int = bbox.astype(np.int32)
         poly = [[bbox_int[0], bbox_int[1]], [bbox_int[0], bbox_int[3]],
@@ -134,6 +136,7 @@ def imshow_det_bboxes(img,
         color.append(bbox_color)
         label_text = class_names[
             label] if class_names is not None else f'class {label}'
+        _label_text = label_text
         if len(bbox) > 4:
             label_text += f'|{bbox[-1]:.02f}'
         ax.text(
@@ -154,6 +157,7 @@ def imshow_det_bboxes(img,
             color_mask = mask_colors[labels[i]]
             mask = segms[i].astype(bool)
             img[mask] = img[mask] * 0.5 + color_mask * 0.5
+            _save.append([i, _label_text, bbox, mask])
 
     plt.imshow(img)
 
@@ -178,8 +182,17 @@ def imshow_det_bboxes(img,
         else:
             plt.show(block=False)
             plt.pause(wait_time)
+            
     if out_file is not None:
         mmcv.imwrite(img, out_file)
+
+    if save_segms is not None:
+        with open(save_segms, 'w') as f:
+            f.write('id,label,score,bbox1,bbox2,bbox3,bbox4\n')
+            for l in _save:
+                i, label, bbox, mask = l
+                f.write('{},{},{},{},{},{},{}\n'.format(i, label, *bbox))
+                np.save('{}_mask_{}_{}.npy'.format(save_segms[:-4], i, label), mask)
 
     plt.close()
 
