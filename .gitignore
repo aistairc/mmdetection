@@ -126,5 +126,4 @@ work_dirs/
 /__results/
 abci/simg
 demo.sh.o*
-data/outputs/
-data/images/
+/data/
