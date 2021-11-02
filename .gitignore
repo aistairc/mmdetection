@@ -127,4 +127,3 @@ work_dirs/
 abci/simg
 demo.sh.o*
 /data/
-/notebooks/

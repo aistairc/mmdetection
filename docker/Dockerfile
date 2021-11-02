@@ -12,7 +12,7 @@ ENV TZ=${TIMEZONE}
 
 RUN ln -snf /usr/share/zoneinfo/${TZ} /etc/localtime && echo ${TZ} > /etc/timezone
 
-RUN apt-get update && apt-get install -y ffmpeg libsm6 libxext6 git ninja-build libglib2.0-0 libsm6 libxrender-dev libxext6 emacs python3-opencv \
+RUN apt-get update && apt-get install -y ffmpeg libsm6 libxext6 git ninja-build libglib2.0-0 libsm6 libxrender-dev libxext6 emacs python3-opencv tmux \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
