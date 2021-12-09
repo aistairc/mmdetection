@@ -1,5 +1,5 @@
 _base_ = [
-    '../_base_/models/ssd300.py', '../_base_/datasets/coco_detection.py',
+    '../_base_/models/ssd300.py', '../_base_/datasets/coco_ext_detection.py',
     '../_base_/schedules/schedule_2x.py', '../_base_/default_runtime.py'
 ]
 # dataset settings
@@ -52,11 +52,25 @@ data = dict(
         times=5,
         dataset=dict(
             type=dataset_type,
-            ann_file=data_root + 'annotations/instances_train.json',
-            img_prefix=data_root + 'train/',
+            ann_file=data_root + 'annotations/instances_train_pp_v3.json',
+            img_prefix=data_root + 'train_pp_v3/',
             pipeline=train_pipeline)),
     val=dict(pipeline=test_pipeline),
     test=dict(pipeline=test_pipeline))
 # optimizer
-optimizer = dict(type='SGD', lr=2e-3, momentum=0.9, weight_decay=5e-4)
+# optimizer = dict(type='SGD', lr=2e-3, momentum=0.9, weight_decay=5e-4)
+optimizer = dict(type='SGD', lr=1e-5, momentum=0.9, weight_decay=5e-4)
 optimizer_config = dict(_delete_=True)
+# learning policy
+lr_config = dict(
+    policy='step',
+    warmup='linear',
+    warmup_iters=500,
+    warmup_ratio=0.001,
+    step=[8])
+# lr_config = dict(
+#     policy='CosineAnnealing',
+#     warmup='linear',
+#     warmup_iters=1000,
+#     warmup_ratio=1.0 / 10,
+#     min_lr_ratio=1e-5)
