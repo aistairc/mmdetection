@@ -1,6 +1,6 @@
 # dataset settings
 dataset_type = 'CocoDataset'
-data_root = 'data/coco_ext/'
+data_root = 'data/coco_pp205v3/'
 img_norm_cfg = dict(
     mean=[123.675, 116.28, 103.53], std=[58.395, 57.12, 57.375], to_rgb=True)
 train_pipeline = [
@@ -31,19 +31,19 @@ test_pipeline = [
 data = dict(
     samples_per_gpu=2,
     workers_per_gpu=2,
-    train=dict(
-        type=dataset_type,
-        ann_file=data_root + 'annotations/instances_train_pp_v3.json',
-        img_prefix=data_root + 'train_pp_v3/',
-        pipeline=train_pipeline),
+    # train=dict(
+    #     type=dataset_type,
+    #     ann_file=data_root + 'annotations/instances_train2017_10k.json',
+    #     img_prefix=data_root + 'train2017/',
+    #     pipeline=train_pipeline),
     val=dict(
         type=dataset_type,
-        ann_file=data_root + 'annotations/instances_val_pp_v3.json',
-        img_prefix=data_root + 'val_pp_v3/',
+        ann_file=data_root + 'annotations/instances_val.json',
+        img_prefix=data_root + 'val/',
         pipeline=test_pipeline),
     test=dict(
         type=dataset_type,
-        ann_file=data_root + 'annotations/instances_val_pp_v3.json',
-        img_prefix=data_root + 'val_pp_v3/',
+        ann_file=data_root + 'annotations/instances_val.json',
+        img_prefix=data_root + 'val/',
         pipeline=test_pipeline))
 evaluation = dict(interval=1, metric='bbox')
