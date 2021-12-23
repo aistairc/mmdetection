@@ -52,11 +52,11 @@ data = dict(
         times=5,
         dataset=dict(
             type=dataset_type,
-            ann_file=data_root + 'annotations/instances_train_5v5.json',
+            # ann_file=data_root + 'annotations/instances_train_5v5.json',
             # ann_file=data_root + 'annotations/instances_train_7v3.json',
-            # ann_file=data_root + 'annotations/instances_train_9v1.json',
-            img_prefix=data_root + 'train_5v5/',
-            # img_prefix=data_root + 'train_9v1/',
+            ann_file=data_root + 'annotations/instances_train_9v1.json',
+            # img_prefix=data_root + 'train_5v5/',
+            img_prefix=data_root + 'train_9v1/',
             pipeline=train_pipeline)),
     val=dict(pipeline=test_pipeline),
     test=dict(pipeline=test_pipeline))
@@ -74,6 +74,6 @@ lr_config = dict(
     # warmup_ratio=0.001,  # 7v3
     # warmup_ratio=0.0001,  # 5v5
     warmup_ratio=1e-5,
-    step=[8, 16, 22])
+    step=[10, 20])
     # step=[16, 22])  # 5v5 # step o decay the learning rate
     # step=[8])  # 7v3
